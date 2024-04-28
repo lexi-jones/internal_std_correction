@@ -16,3 +16,7 @@ Lexi Jones-Kellett
 	- Needs to be run for each internal standard (Blautia_producta, Deinococcus_radiodurans, Thermus_thermophilus)
 
 4. We averaged the counts estimated from each of the internal standards for the rest of analysis. 
+
+
+NOTE: Much of this protocol followed Lin et al. 2019 (https://doi.org/10.1128/AEM.02634-18); PNGs include some of the 
+constants and equations.

@@ -15,8 +15,10 @@ internal_standards_quant.ipynb
 	- Used to derive DNA concentration averages from replicate estimates. 
 
 calc_ASV_abundance_from_IS_v2.py
-	- Code applied to entire corrected merged 16S+18S relative abundance table to calculate absolute abundance. 
-	- Needs to be run for each internal standard (Blautia_producta, Deinococcus_radiodurans, Thermus_thermophilus)
+	- Code applied to entire corrected merged 16S+18S relative abundance table to calculate absolute 
+	  abundance. 
+	- Needs to be run for each internal standard (Blautia_producta, Deinococcus_radiodurans, 
+	  Thermus_thermophilus)
 	- methods described in "ASV_abundance_methodology.png"
 
 

@@ -5,9 +5,9 @@
 #
 # Lexi Jones-Kellett
 # Date created: 08/11/23
-# Last edited: 10/30/23
+# Last edited: 09/20/24
 
-import csv,sys
+import csv,sys,json
 import numpy as np
 
 IS = str(sys.argv[1]) # user input is one of the internal standards
@@ -27,9 +27,14 @@ elif IS == 'TT':
 else:
     print('Error')
 
+    
+# config file contains local directory paths for "data_dir" and "ASV_count_dir"
+with open("conf.json") as json_conf : 
+    config = json.load(json_conf)
+    
 # Get the batch number for each of the samples
 sample_batches = {}
-with open('/Users/lexijones/Dropbox (MIT)/Grad_School/Research/G4_consolidated/data/G4_IS_sample_batches.csv') as csv_file:
+with open(config["data_dir"] + 'G4_IS_sample_batches.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     i = 0
     for row in csv_reader: 
@@ -41,7 +46,7 @@ with open('/Users/lexijones/Dropbox (MIT)/Grad_School/Research/G4_consolidated/d
 
 # Get the concentrations of the internal standards for each batch (from DNA quantification)
 IS_quants = {}
-with open('/Users/lexijones/Dropbox (MIT)/Grad_School/Research/G4_consolidated/data/IS_quants.csv') as csv_file:
+with open(config["data_dir"] + 'IS_quants.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     i = 0
     for row in csv_reader:
@@ -85,7 +90,7 @@ ASV_count_file = '221118-1309_LexiGradients-HighCov_2.09-fold-18S-correction_nor
 ASV_IS_ABS_file = '221118-1309_LexiGradients-HighCov_2.09-fold-18S-correction_normalized_sequence_counts_abs_ASV_abundance_IS_%s.tsv'%(IS)
 
 IS_counts = []
-with open(ASV_count_dir + ASV_count_file) as csv_file:
+with open(config["ASV_count_dir"] + ASV_count_file) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter='\t')
     for row in csv_reader:
         OTU = row[0]
@@ -99,7 +104,7 @@ IS_counts_total = np.nansum(IS_counts,axis=0)
 all_IS_OTUs = ['0a1e7e4b25a59be69931c5d7f92751f5','f40b1be49d3bca5b8fabdd944abb31bf','2029a1010d7bebac2d09361c275f9fda',
            '6a5fcf5f0ca1f18bca2297194442a6d7','9aa3ebacc998945a0cd514ca909e5231','5b0d64b13238ee1991c15a9913bec9bc'] 
 
-f = open(ASV_count_dir + ASV_IS_ABS_file, 'w') # new table file name
+f = open(config["ASV_count_dir"] + ASV_IS_ABS_file, 'w') # new table file name
 writer = csv.writer(f)
 
 with open(ASV_count_dir + ASV_count_file) as csv_file:
